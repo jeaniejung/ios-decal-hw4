@@ -202,29 +202,19 @@ class PlayerViewController: UIViewController {
      */
 
     func previousTrackTapped(sender: UIButton) {
-        if (player.rate != 0) {
-            if (player.currentItem!.currentTime() > CMTimeMake(3, 1)) {
-                player.currentItem!.seekToTime(CMTimeMake(0, 1))
-            }
-            else {
-                if (currentIndex > 0) {
-                    currentIndex = currentIndex - 1
-                } else {
-                    currentIndex = tracks.count - 1
-                }
-                loadTrackElements()
-                updateTrack()
-            }
-        }
-        else {
+        if ((player.currentItem!.currentTime() > CMTimeMake(3, 1)) && (player.rate != 0)) {
+            player.currentItem!.seekToTime(CMTimeMake(0, 1))
+        } else {
             if (currentIndex > 0) {
                 currentIndex = currentIndex - 1
             } else {
                 currentIndex = tracks.count - 1
             }
             loadTrackElements()
+            if (player.rate != 0) {
+                updateTrack()
+            }
         }
-    
     }
     
     
